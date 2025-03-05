@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "lib": ["esnext"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "checkJs": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitOverride": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**/*",
+    "**/fixtures/**"
+  ]
+}

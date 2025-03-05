@@ -1,0 +1,89 @@
+{
+  "name": "postcss-better-units",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.5.2",
+  "description": "A PostCSS plugin to define, transform, and manage custom or existing CSS units with ease.",
+  "author": "zumm <jan.plys@gmail.com> (https://github.com/zumm)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zumm/postcss-better-units.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zumm/postcss-better-units/issues"
+  },
+  "keywords": [
+    "css",
+    "postcss",
+    "postcss-plugin",
+    "units",
+    "custom units"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint": "eslint .",
+    "commitlint": "commitlint --edit",
+    "typecheck": "tsc --noEmit",
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "test": "vitest run --bail 1",
+    "release": "dotenvx run -- semantic-release"
+  },
+  "peerDependencies": {
+    "postcss": "^8.5.3"
+  },
+  "dependencies": {
+    "postcss-value-parser": "^4.2.0"
+  },
+  "devDependencies": {
+    "@anolilab/semantic-release-pnpm": "^1.1.10",
+    "@antfu/eslint-config": "^4.4.0",
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@commitlint/types": "^19.5.0",
+    "@dotenvx/dotenvx": "^1.38.4",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.3",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "eslint": "^9.21.0",
+    "husky": "^9.1.7",
+    "semantic-release": "^24.2.3",
+    "typescript": "^5.8.2",
+    "unbuild": "^3.5.0",
+    "vitest": "^3.0.7"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ],
+    "overrides": {
+      "esbuild@<0.25.0": "^0.25.0"
+    }
+  }
+}
