@@ -70,6 +70,17 @@ describe('postcss', () => {
     )
   })
 
+  it('important modifier', async () => {
+    const { css } = await run(
+      'main { max-height: 100vh !important; }',
+      [{ fromUnit: 'vh', toCssVar: '--vh' }],
+    )
+
+    expect(css).toEqual(
+      'main { max-height: calc(100 * var(--vh)) !important; }',
+    )
+  })
+
   it('multiple units', async () => {
     const { css } = await run(
       'div { width: 1rem; margin-left: -16rpx; }',
