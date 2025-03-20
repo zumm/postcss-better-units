@@ -131,5 +131,36 @@ betterUnits([{
 }
 ```
 
+### Same unit transforms
+Sometimes unit should be transform into expression based on this unit. In this case postcss will get stuck inside an infinite recursion. To make things work, you need to break this recursion with creative exclusion rule.
+
+```ts
+betterUnits([{
+  fromUnit: 'vw',
+  transform: value => `calc(${value}vw / var(--screen-scale))`,
+  exclude: /--screen-scale/,
+}])
+```
+
+```css
+:root {
+  --screen-scale: 0.5;
+}
+
+main {
+  zoom: var(--screen-scale);
+  width: 100vw;
+}
+/* becomes */
+:root {
+  --screen-scale: 0.5;
+}
+
+main {
+  zoom: var(--screen-scale);
+  width: calc(100vw / var(--screen-scale));
+}
+```
+
 ## Feedback
 Feel free to request features or report bugs, even if project seems abandoned. Feedback is always appreciated.
