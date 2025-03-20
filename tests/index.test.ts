@@ -95,6 +95,20 @@ describe('postcss', () => {
     )
   })
 
+  it('multiple units in same declaration', async () => {
+    const { css } = await run(
+      'div { width: calc(50vw + 50vh); }',
+      [
+        { fromUnit: 'vw', toUnit: 'dvw' },
+        { fromUnit: 'vh', toUnit: 'dvh' },
+      ],
+    )
+
+    expect(css).toEqual(
+      'div { width: calc(50dvw + 50dvh); }',
+    )
+  })
+
   it('preserve', async () => {
     const { css } = await run(
       'div { min-height: 100dvh; }',
@@ -114,6 +128,23 @@ describe('postcss', () => {
 
     expect(css).toEqual(
       'div { min-height: 100vh; min-height: 100dvh; }',
+    )
+  })
+
+  it('preserve conflict resolves to last', async () => {
+    const { css } = await run(
+      'div { width: calc(50vw + 50vh); }',
+      {
+        units: [
+          { fromUnit: 'vw', toUnit: 'dvw', preserve: 'after' },
+          { fromUnit: 'vh', toUnit: 'dvh', preserve: 'before' },
+        ],
+        preserve: false,
+      },
+    )
+
+    expect(css).toEqual(
+      'div { width: calc(50vw + 50vh); width: calc(50dvw + 50dvh); }',
     )
   })
 
